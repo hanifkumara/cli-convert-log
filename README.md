@@ -15,3 +15,13 @@ This is a simple project to convert log files to json or text using CLI tools
 ```bash
 2. npm install -g
 ```
+
+## Examples of use
+
+```bash
+clog D:\example-log.log -t json //to convert log file to json
+```
+
+```bash
+clog D:\example-log.log -t text //to convert log file to text
+```
