@@ -18,10 +18,4 @@ This is a simple project to convert log files to json or text using CLI tools
 
 ## Examples of use
 
-```bash
-clog D:\example-log.log -t json //to convert log file to json
-```
-
-```bash
-clog D:\example-log.log -t text //to convert log file to text
-```
+write 'clog' and please fill in as needed
