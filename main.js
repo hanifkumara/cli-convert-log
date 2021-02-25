@@ -16,15 +16,38 @@ console.log(
 ); 
 
 const run = async () => {
-  const answer = await inquirer.chooseConvertTo();
-  if (answer.convert === 'json') {
-    fs.writeFileSync( 'example-logfile/example-log.json', convertTo.convertJson() )
-    console.log('Successfully converted log file to json. Please check the example-logfile directory')
+  const answer = await inquirer.tryArgsv();
+  let file = answer.location;
+  fileTxt = file.substr(0, file.lastIndexOf(".")) + ".txt";
+  fileJson = file.substr(0, file.lastIndexOf(".")) + ".json";
+
+  if (!answer.flag) {
+    fs.writeFileSync( fileTxt, convertTo.convertTxt(answer.location) )
+    console.log('Successfully converted log file to Plaintext')
     return
-  } else {
-    fs.writeFileSync( 'example-logfile/example-log.txt', convertTo.convertTxt() )
-    console.log('Successfully converted log file to txt. Please check the example-logfile directory')
-    return
+  }
+  if (answer.flag === '-t') {
+    if (answer.type === 'json') {
+      if (answer.flagSecond === '-o') {
+        fs.writeFileSync( answer.locationFile, convertTo.convertJson(answer.location) )
+        console.log('Successfully converted log file to json')
+        return
+      } else {
+        fs.writeFileSync( fileJson, convertTo.convertJson(answer.location) )
+        console.log('Successfully converted log file to json')
+        return
+      }
+    } else if (answer.type === 'text') {
+      if (answer.flagSecond === '-o') {
+        fs.writeFileSync( answer.locationFile, convertTo.convertTxt(answer.location) )
+        console.log('Successfully converted log file to Plaintext')
+        return
+      } else {
+        fs.writeFileSync( fileTxt, convertTo.convertTxt(answer.location) )
+        console.log('Successfully converted log file to Plaintext')
+        return
+      }
+    }
   }
 };
 
